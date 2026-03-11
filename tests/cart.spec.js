@@ -1,12 +1,9 @@
-const {test, expect} = require('@playwright/test');
-const LoginPage = require('../pages/loginPage.js');
-const testData = require('../utils/testData.js');
+const {test, expect} = require('../fixtures/baseTest.js');
 require('dotenv').config();
 
-test('Add product to cart', async ({page}) => {
+test('Add product to cart', async ({page, loginPage}) => {
     await page.goto(process.env.BASE_URL);
-    const loginInst = new LoginPage(page);
-    await loginInst.login(process.env.USERNAME, process.env.PASSWORD);
+    await loginPage.login(process.env.USER, process.env.PASSWORD);
     await page.getByText('Add to cart').first().click();
     await page.locator('.shopping_cart_link').click();
     await expect(page).toHaveURL('https://www.saucedemo.com/cart.html')
