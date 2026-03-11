@@ -1,0 +1,27 @@
+name: Playright Tests
+
+on: 
+  push:
+    branches: [master]
+
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18'
+
+        - name: Install dependencies
+          run: npm install
+
+        - name: Install Playwright browsers
+          run: npx playwright install --with-deps
+
+        - name: Run Playright tests
+          run: npx playwright test
