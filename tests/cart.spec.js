@@ -1,7 +1,7 @@
 const {test, expect} = require('../fixtures/baseTest.js');
 require('dotenv').config();
 
-test('Add product to cart', async ({page, loginPage}) => {
+test('@regression Add product to cart', async ({page, loginPage}) => {
     await page.goto(process.env.BASE_URL);
     await loginPage.login(process.env.USER, process.env.PASSWORD);
     await page.getByText('Add to cart').first().click();
