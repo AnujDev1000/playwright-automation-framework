@@ -34,11 +34,11 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Smoke Tests
-        if: github.event.name == 'pull_request'
+        if: github.event_name == 'pull_request'
         run: npx playwright test --grep "@smoke" --reporter=html
 
       - name: Run Regression Tests
-        if: github.event.name == 'schedule'
+        if: github.event_name == 'schedule'
         run: npx playwright test --grep "@regression" --reporter=html
 
       - name: Upload Playright test results
