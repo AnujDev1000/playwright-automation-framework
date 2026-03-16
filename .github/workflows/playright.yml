@@ -25,3 +25,10 @@ jobs:
 
       - name: Run Playright tests
         run: npx playwright test
+
+      - name: Upload Playright test results
+        uses: actions/upload-artifacts@v4
+        if: always()
+        with:
+          name: playwright-test-results
+          path: playwright-reports/
