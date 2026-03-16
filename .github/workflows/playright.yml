@@ -1,8 +1,10 @@
 name: Playright Tests
 
 on: 
-  push:
+  pull_request:
     branches: [master]
+  schedule:
+    - cron: '30 3 * * *' # Runs every day at midnight
 
 permissions:
   contents: write
@@ -26,8 +28,13 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playright tests
+      - name: Run Smoke Tests
+        if: github.event.name == 'pull_request'
         run: npx playwright test --grep "@smoke" --reporter=html
+
+      - name: Run Regression Tests
+        if: github.event.name == 'schedule'
+        run: npx playwright test --grep "@regression" --reporter=html
 
       - name: Upload Playright test results
         uses: actions/upload-artifact@v4
