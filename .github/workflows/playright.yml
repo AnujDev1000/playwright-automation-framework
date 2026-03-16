@@ -24,7 +24,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playright tests
-        run: npx playwright test
+        run: npx playwright test "@smoke" --reporter=html
 
       - name: Upload Playright test results
         uses: actions/upload-artifact@v4
@@ -32,3 +32,10 @@ jobs:
         with:
           name: playwright-test-results
           path: test-results/
+
+      - name: Upload Playright Html report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-html-report
+          path: playwright-report
