@@ -2,7 +2,6 @@ name: Playright Tests
 
 on: 
   pull_request:
-    branches: [master]
   schedule:
     - cron: '50 3 * * *' # Runs every day at midnight
   workflow_dispatch:
