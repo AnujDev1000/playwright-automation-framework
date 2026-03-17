@@ -8,4 +8,16 @@ exports.test = base.test.extend({
     }
 })
 
+base.test.afterEach(async ({page}, testInfo) => {
+    const status = testInfo.status;
+
+    //screenshot based on test status
+    const screenshot = page.screenshot();
+
+    await testInfo.attach(`${testInfo.title}-${status}`, {
+        body: await screenshot,
+        contentType: 'image/png'
+    })
+})
+
 exports.expect = base.expect;
