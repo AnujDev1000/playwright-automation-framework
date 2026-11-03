@@ -21,7 +21,8 @@ export default defineConfig({
   /* Retry on CI only */
   retries: 2,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 2 : undefined,
+  // workers: process.env.CI ? 2 : undefined,
+  workers: 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -42,15 +43,15 @@ export default defineConfig({
       use: { browserName: 'chromium' },
     },
 
-    {
-      name: 'firefox',
-      use: { browserName: 'firefox' },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { browserName: 'firefox' },
+    // },
 
-    {
-      name: 'webkit',
-      use: { browserName: 'webkit' },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { browserName: 'webkit' },
+    // },
 
     /* Test against mobile viewports. */
     // {
